@@ -25,16 +25,16 @@ class CMD_parser:
         if cmd[0] == "help":
             self.handle_help(cmd[1:])
             return
-        
+
         cmd_json = None
         for i in self.commands:
             if i["name"] == cmd[0]:
                 cmd_json=copy(i)
-        
+
         if cmd_json == None:
             self.console.print("[bold red]Unknown command [/bold red][white]" + repr(cmd[0]) + "[/white][bold red]![/bold red]")
             return
-        
+
         try:
             if cmd_json != None and "function" in cmd_json.keys():
                 fn = getattr(sys.modules["__main__"], cmd_json["function"])
@@ -44,7 +44,7 @@ class CMD_parser:
             self.console.print("[bold red]Error! The command [/bold red][white]" + repr(cmd[0]) + "[/white][bold red] is propably not implemented![/bold red]")
             return
 
-        #try:
+        args={}
         if "arguments" in cmd_json.keys():
             # number of all possible arguments
             arg_count = len(cmd_json["arguments"])
@@ -61,7 +61,6 @@ class CMD_parser:
                 self.console.print("[bold red]Error! The command [/bold red][white]" + repr(cmd[0]) + "[/white][bold red] requires " + str(req_arg_count) + " arguments, received " + str(len(cmd[1:])) + "![/bold red]")
                 return
 
-            args={}
             # loop over all entered commands in cmd_json
             for i in cmd_json["arguments"][:len(cmd[1:])]:
                 # get value of that passed command
