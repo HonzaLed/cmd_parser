@@ -4,7 +4,7 @@ from copy import copy
 import sys
 import os
 
-class CMD_parser:
+class Parser:
     def __init__(self, commands, prompt="[bold yellow]> [/bold yellow]", rich_console=None):
         self.commands = commands
         self.prompt_text = prompt
