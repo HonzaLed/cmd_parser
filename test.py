@@ -1,4 +1,4 @@
-from cmd import CMD_parser
+import cmd
 import sys
 
 def print_f(cmd):
@@ -29,7 +29,7 @@ commands = [
     {"name": "testb", "help": "this is the test commanda"},
 ]
 
-class Parser(CMD_parser):
+class Parser(cmd.Parser):
     n=0
     def handle_test(self, cmd):
         print("This is test!")
